@@ -1,17 +1,19 @@
 package com.br.carmanager.api.domain.service.impl;
 
+import com.br.carmanager.api.domain.exception.CarroNotFoundException;
 import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.repository.CarroRepository;
 import com.br.carmanager.api.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CarroServiceImpl implements CarroService {
 
+    private static final String MSG_CARRO_NAO_ENCONTRADO = "Não existe um cadastro de carro com o código %d";
     @Autowired
     private CarroRepository carroRepository;
 
@@ -21,8 +23,8 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
-    public Optional<Carro> findById(Long id) {
-        return carroRepository.findById(id);
+    public Carro findById(Long id) {
+        return BuscarOuFalhar(id);
     }
 
     @Override
@@ -32,6 +34,18 @@ public class CarroServiceImpl implements CarroService {
 
     @Override
     public void delete(Long id) {
-        carroRepository.deleteById(id);
+
+        try {
+            carroRepository.deleteById(id);
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new CarroNotFoundException(String.format(MSG_CARRO_NAO_ENCONTRADO, id));
+        }
     }
+
+    public Carro BuscarOuFalhar(Long id) {
+        return carroRepository.findById(id)
+                .orElseThrow(() -> new CarroNotFoundException(String.format(MSG_CARRO_NAO_ENCONTRADO, id)));
+    }
+
 }

@@ -8,11 +8,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/v1/funcionarios ", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/funcionarios", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FuncionarioController {
 
     @Autowired
@@ -24,12 +25,12 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Funcionario>> findById(@PathVariable Long id) {
+    public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
         return ResponseEntity.ok(funcionarioService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Funcionario> saveFuncionario(@RequestBody Funcionario funcionario) {
+    public ResponseEntity<Funcionario> saveFuncionario(@RequestBody @Valid Funcionario funcionario) {
         return ResponseEntity.ok(funcionarioService.save(funcionario));
     }
 

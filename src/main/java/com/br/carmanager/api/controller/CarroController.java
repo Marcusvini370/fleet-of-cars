@@ -8,11 +8,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/v1/carros ", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/carros", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CarroController {
 
     @Autowired
@@ -24,12 +25,12 @@ public class CarroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Carro>> findById(@PathVariable Long id) {
+    public ResponseEntity<Carro> findById(@PathVariable Long id) {
         return ResponseEntity.ok(carroService.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Carro> saveCarro(@RequestBody Carro carro) {
+    public ResponseEntity<Carro> saveCarro(@RequestBody @Valid Carro carro) {
         return ResponseEntity.ok(carroService.save(carro));
     }
 

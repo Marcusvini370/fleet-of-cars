@@ -20,7 +20,7 @@ public class ViagemServiceImpl implements ViagemService {
     }
 
     @Override
-    public Optional<ViagemRepository> findById(Long id) {
+    public Optional<Viagem> findById(Long id) {
         return viagemRepository.findById(id);
     }
 

@@ -24,10 +24,10 @@ public class Viagem implements Serializable {
 
 
     @ManyToOne
-    private Funcionario usuarioId;
+    private Funcionario funcionario;
 
     @ManyToOne
-    private Carro carroId;
+    private Carro carro;
 
     private Date dataRetirada;
     private Date dataEntrega;
