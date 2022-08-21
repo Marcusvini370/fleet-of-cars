@@ -1,5 +1,7 @@
 package com.br.carmanager.api.controller;
 
+import com.br.carmanager.api.domain.dto.FuncionarioDTO;
+import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/v1/funcionarios", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -20,18 +21,18 @@ public class FuncionarioController {
     private FuncionarioService funcionarioService;
 
     @GetMapping
-    public ResponseEntity<List<Funcionario>> findAll() {
+    public ResponseEntity<List<FuncionarioDTO>> findAll() {
         return ResponseEntity.ok(funcionarioService.findAll());
     }
 
     @GetMapping("/{idFuncionario}")
-    public ResponseEntity<Funcionario> findById(@PathVariable Long idFuncionario) {
+    public ResponseEntity<FuncionarioDTO> findById(@PathVariable Long idFuncionario) {
         return ResponseEntity.ok(funcionarioService.findById(idFuncionario));
     }
 
     @PostMapping
-    public ResponseEntity<Funcionario> saveFuncionario(@RequestBody @Valid Funcionario funcionario) {
-        return ResponseEntity.ok(funcionarioService.save(funcionario));
+    public ResponseEntity<FuncionarioDTO> saveFuncionario(@RequestBody @Valid FuncionarioInput funcionarioInput) {
+        return ResponseEntity.ok(funcionarioService.save(funcionarioInput));
     }
 
     @DeleteMapping("/{id}")

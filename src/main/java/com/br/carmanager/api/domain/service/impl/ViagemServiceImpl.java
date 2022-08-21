@@ -1,5 +1,9 @@
 package com.br.carmanager.api.domain.service.impl;
 
+import com.br.carmanager.api.assembler.ViagemDtoAssembler;
+import com.br.carmanager.api.assembler.ViagemInputDisassembler;
+import com.br.carmanager.api.domain.dto.ViagemDTO;
+import com.br.carmanager.api.domain.dto.input.ViagemInput;
 import com.br.carmanager.api.domain.enums.StatusCarro;
 import com.br.carmanager.api.domain.exception.FuncionarioWithCarInUseException;
 import com.br.carmanager.api.domain.exception.NegocioException;
@@ -29,11 +33,19 @@ public class ViagemServiceImpl implements ViagemService {
     @Autowired
     private FuncionarioServiceImpl funcionarioService;
 
+    @Autowired
+    private ViagemDtoAssembler viagemDtoAssembler;
+
+    @Autowired
+    ViagemInputDisassembler viagemInputDisassembler;
+
     @Override
-    public Viagem save(Viagem viagem, Long idFuncionario, Long idCarro) {
+    public ViagemDTO save(ViagemInput viagemInput, Long idFuncionario, Long idCarro) {
 
         Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
         Carro carro = carroService.BuscarOuFalhar(idCarro);
+
+        Viagem viagem = viagemInputDisassembler.toDomainObject(viagemInput);
 
         Viagem validateFuncionario = viagemRepository.findViagemByFuncionarioWithCarInUse(funcionario.getId(), carro.getId());
 
@@ -41,17 +53,16 @@ public class ViagemServiceImpl implements ViagemService {
             viagem.setFuncionario(funcionario);
             viagem.setCarro(carro);
 
-            carro.setStatus(StatusCarro.INDISPONIVEL);
-            carroService.save(carro);
-            return viagemRepository.save(viagem);
+            viagem.getCarro().setStatus(StatusCarro.INDISPONIVEL);
+            return viagemDtoAssembler.toModel(viagemRepository.save(viagem));
         }
 
             throw new FuncionarioWithCarInUseException(String.format(MSG_FUNCIONARIO_COM_CARRO, funcionario.getId(), carro.getId()));
     }
 
     @Override
-    public Viagem findById(Long id) {
-        return BuscarOuFalhar(id);
+    public ViagemDTO findById(Long id) {
+        return viagemDtoAssembler.toModel(BuscarOuFalhar(id));
     }
 
     @Override
@@ -67,10 +78,9 @@ public class ViagemServiceImpl implements ViagemService {
         if (viagemV.size() > 0) {
             if (viagem != null && viagem.getDataEntrega() == null) {
                 viagem.setDataEntrega(OffsetDateTime.now());
-                carro.setStatus(StatusCarro.DISPONIVEL);
+                viagem.getCarro().setStatus(StatusCarro.DISPONIVEL);
 
                 viagemRepository.save(viagem);
-                carroService.save(carro);
             } else {
                 throw new NegocioException(String.format("A viagem já se encontra concluída!"));
             }

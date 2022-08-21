@@ -1,5 +1,9 @@
 package com.br.carmanager.api.domain.service.impl;
 
+import com.br.carmanager.api.assembler.CarroDtoAssembler;
+import com.br.carmanager.api.assembler.CarroInputDisassembler;
+import com.br.carmanager.api.domain.dto.CarroDTO;
+import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.domain.exception.CarroNotFoundException;
 import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.repository.CarroRepository;
@@ -17,19 +21,26 @@ public class CarroServiceImpl implements CarroService {
     @Autowired
     private CarroRepository carroRepository;
 
+    @Autowired
+    private CarroDtoAssembler carroDtoAssembler;
+
+    @Autowired
+    CarroInputDisassembler carroInputDisassembler;
+
     @Override
-    public Carro save(Carro carro) {
-        return carroRepository.save(carro);
+    public CarroDTO save(CarroInput carroInput) {
+        Carro carro = carroInputDisassembler.toDomainObject(carroInput);
+        return carroDtoAssembler.toModel(carroRepository.save(carro));
     }
 
     @Override
-    public Carro findById(Long id) {
-        return BuscarOuFalhar(id);
+    public CarroDTO findById(Long id) {
+        return carroDtoAssembler.toModel(BuscarOuFalhar(id));
     }
 
     @Override
-    public List<Carro> findAll() {
-        return carroRepository.findAll();
+    public List<CarroDTO> findAll() {
+        return carroDtoAssembler.toCollectionModel(carroRepository.findAll());
     }
 
     @Override
@@ -44,8 +55,8 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
-    public List<Carro> findCarByStatusUnavailable() {
-        return carroRepository.findCarByStatusUnavailable();
+    public List<CarroDTO> findCarByStatusUnavailable() {
+        return carroDtoAssembler.toCollectionModel( carroRepository.findCarByStatusUnavailable());
     }
 
     public Carro BuscarOuFalhar(Long id) {

@@ -1,6 +1,9 @@
 package com.br.carmanager.api.domain.service.impl;
 
-import com.br.carmanager.api.domain.exception.CarroNotFoundException;
+import com.br.carmanager.api.assembler.FuncionarioDtoAssembler;
+import com.br.carmanager.api.assembler.FuncionarioInputDisassembler;
+import com.br.carmanager.api.domain.dto.FuncionarioDTO;
+import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.exception.FuncionarioNotFoundException;
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
@@ -19,19 +22,26 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private FuncionarioDtoAssembler funcionarioDtoAssembler;
+
+    @Autowired
+    private FuncionarioInputDisassembler funcionarioInputDisassembler;
+
     @Override
-    public Funcionario save(Funcionario funcionario) {
-        return funcionarioRepository.save(funcionario);
+    public FuncionarioDTO save(FuncionarioInput funcionarioInput) {
+        Funcionario funcionario = funcionarioInputDisassembler.toDomainObject(funcionarioInput);
+        return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionario));
     }
 
     @Override
-    public Funcionario findById(Long id) {
-        return BuscarOuFalhar(id);
+    public FuncionarioDTO findById(Long id) {
+        return funcionarioDtoAssembler.toModel(BuscarOuFalhar(id));
     }
 
     @Override
-    public List<Funcionario> findAll() {
-        return funcionarioRepository.findAll();
+    public List<FuncionarioDTO> findAll() {
+        return funcionarioDtoAssembler.toCollectionModel(funcionarioRepository.findAll());
     }
 
     @Override

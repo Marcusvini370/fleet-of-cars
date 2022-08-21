@@ -1,5 +1,7 @@
 package com.br.carmanager.api.controller;
 
+import com.br.carmanager.api.domain.dto.ViagemDTO;
+import com.br.carmanager.api.domain.dto.input.ViagemInput;
 import com.br.carmanager.api.domain.model.Viagem;
 import com.br.carmanager.api.domain.service.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,13 @@ public class ViagemController {
     private ViagemService viagemService;
 
     @GetMapping("/{idViagem}")
-    public ResponseEntity<Viagem> findById(@PathVariable Long idViagem) {
+    public ResponseEntity<ViagemDTO> findById(@PathVariable Long idViagem) {
         return ResponseEntity.ok(viagemService.findById(idViagem));
     }
 
     @PostMapping("/{idFuncionario}/{idCarro}")
-    public ResponseEntity<Viagem> saveViagem(@PathVariable Long idFuncionario, @PathVariable Long idCarro, Viagem viagem) {
-        return ResponseEntity.ok(viagemService.save(viagem, idFuncionario, idCarro));
+    public ResponseEntity<ViagemDTO> saveViagem(@PathVariable Long idFuncionario, @PathVariable Long idCarro, ViagemInput viagemInput) {
+        return ResponseEntity.ok(viagemService.save(viagemInput, idFuncionario, idCarro));
     }
 
     @DeleteMapping("/{idFuncionario}/{idCarro}")

@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -22,10 +21,9 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
     private String nome;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
     private Integer matricula;
 
 }
