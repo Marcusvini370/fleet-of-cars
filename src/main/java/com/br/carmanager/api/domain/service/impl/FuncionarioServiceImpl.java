@@ -10,6 +10,7 @@ import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,9 +29,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Autowired
     private FuncionarioInputDisassembler funcionarioInputDisassembler;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public FuncionarioDTO save(FuncionarioInput funcionarioInput) {
         Funcionario funcionario = funcionarioInputDisassembler.toDomainObject(funcionarioInput);
+
+        funcionarioInput.setPassword(bCryptPasswordEncoder.encode(funcionarioInput.getPassword()));
         return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionario));
     }
 

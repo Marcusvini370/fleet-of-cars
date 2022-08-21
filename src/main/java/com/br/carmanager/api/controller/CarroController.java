@@ -2,7 +2,6 @@ package com.br.carmanager.api.controller;
 
 import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.input.CarroInput;
-import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

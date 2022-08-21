@@ -1,8 +1,6 @@
 package com.br.carmanager.api.assembler;
 
-import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
-import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.model.Funcionario;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

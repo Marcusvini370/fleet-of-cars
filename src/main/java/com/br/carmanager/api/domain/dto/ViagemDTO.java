@@ -4,10 +4,7 @@ import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.model.Funcionario;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
 import java.time.OffsetDateTime;
 
 @Getter
@@ -19,5 +16,4 @@ public class ViagemDTO {
     private Carro carro;
     private OffsetDateTime dataRetirada;
     private OffsetDateTime  dataEntrega;
-
 }

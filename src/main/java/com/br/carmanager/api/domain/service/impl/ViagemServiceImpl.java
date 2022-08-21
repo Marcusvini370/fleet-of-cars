@@ -14,6 +14,7 @@ import com.br.carmanager.api.domain.model.Viagem;
 import com.br.carmanager.api.domain.repository.ViagemRepository;
 import com.br.carmanager.api.domain.service.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
