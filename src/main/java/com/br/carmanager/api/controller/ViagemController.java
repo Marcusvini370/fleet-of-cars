@@ -27,10 +27,10 @@ public class ViagemController {
         return ResponseEntity.ok(viagemService.save(viagem, idFuncionario, idCarro));
     }
 
-    @DeleteMapping("/{idViagem}")
+    @DeleteMapping("/{idFuncionario}/{idCarro}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long idViagem) {
-        viagemService.delete(idViagem);
+    public void deleteById(@PathVariable Long idFuncionario, @PathVariable Long idCarro) {
+        viagemService.delete(idFuncionario, idCarro);
     }
 
     @GetMapping("/{month}/{year}")

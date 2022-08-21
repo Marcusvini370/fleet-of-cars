@@ -2,6 +2,7 @@ package com.br.carmanager.api.domain.service.impl;
 
 import com.br.carmanager.api.domain.enums.StatusCarro;
 import com.br.carmanager.api.domain.exception.FuncionarioWithCarInUseException;
+import com.br.carmanager.api.domain.exception.NegocioException;
 import com.br.carmanager.api.domain.exception.ViagemNotFoundException;
 import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.model.Funcionario;
@@ -34,7 +35,7 @@ public class ViagemServiceImpl implements ViagemService {
         Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
         Carro carro = carroService.BuscarOuFalhar(idCarro);
 
-        Viagem validateFuncionario = viagemRepository.findViagemByFuncionarioWithCarInUse(funcionario.getId());
+        Viagem validateFuncionario = viagemRepository.findViagemByFuncionarioWithCarInUse(funcionario.getId(), carro.getId());
 
         if (carro.getStatus().equals(StatusCarro.DISPONIVEL) && validateFuncionario == null) {
             viagem.setFuncionario(funcionario);
@@ -54,15 +55,28 @@ public class ViagemServiceImpl implements ViagemService {
     }
 
     @Override
-    public void delete(Long idViagem) {
-        Viagem viagem = BuscarOuFalhar(idViagem);
-        Carro carro = viagem.getCarro();
+    public void delete(Long idFuncionario,Long idCarro) {
+        //Viagem viagem = BuscarOuFalhar(idViagem);
+        Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
+        Carro carro = carroService.BuscarOuFalhar(idCarro);
 
-        viagem.setDataEntrega(OffsetDateTime.now());
-        carro.setStatus(StatusCarro.DISPONIVEL);
+        Viagem viagem = viagemRepository.findViagemByFuncionarioWithCarInUse(funcionario.getId(), carro.getId());
 
-        viagemRepository.save(viagem);
-        carroService.save(carro);
+        List<Viagem> viagemV = viagemRepository.findViagemByFuncionarioIdAndCarroId(funcionario.getId(), carro.getId());
+
+        if (viagemV.size() > 0) {
+            if (viagem != null && viagem.getDataEntrega() == null) {
+                viagem.setDataEntrega(OffsetDateTime.now());
+                carro.setStatus(StatusCarro.DISPONIVEL);
+
+                viagemRepository.save(viagem);
+                carroService.save(carro);
+            } else {
+                throw new NegocioException(String.format("A viagem já se encontra concluída!"));
+            }
+        } else {
+            throw new FuncionarioWithCarInUseException(String.format("Não existe viagem registrada com o funcionario %s usando o carro codigo %d", funcionario.getNome(), carro.getId()));
+        }
     }
 
     @Override
