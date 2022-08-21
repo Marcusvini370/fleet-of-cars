@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/v1/viagem", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ViagemController {
@@ -31,5 +33,8 @@ public class ViagemController {
         viagemService.delete(idViagem);
     }
 
-
+    @GetMapping("/{month}/{year}")
+    public ResponseEntity<List<Viagem>> findViagemByDataEntregaWithMonthAndYear(@PathVariable Integer month, @PathVariable Integer year) {
+        return ResponseEntity.ok(viagemService.findViagemByDataEntregaWithMonthAndYear(month, year));
+    }
 }
