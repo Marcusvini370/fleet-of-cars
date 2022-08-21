@@ -10,6 +10,10 @@ import com.br.carmanager.api.domain.service.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Date;
+
 @Service
 public class ViagemServiceImpl implements ViagemService {
 
@@ -46,11 +50,16 @@ public class ViagemServiceImpl implements ViagemService {
     }
 
     @Override
-    public void delete(Long idFuncionario, Long idCarro) {
-        Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
-        Carro carro = carroService.BuscarOuFalhar(idCarro);
+    public void delete(Long idViagem) {
+        Viagem viagem = BuscarOuFalhar(idViagem);
+        Carro carro = viagem.getCarro();
 
-       // viagemRepository.deleteById(id);
+        viagem.setDataEntrega(OffsetDateTime.now());
+        carro.setStatus(StatusCarro.DISPONIVEL);
+
+        viagemRepository.save(viagem);
+        carroService.save(carro);
+
     }
 
     public Viagem BuscarOuFalhar(Long id) {

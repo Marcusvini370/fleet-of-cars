@@ -8,8 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping(value = "/api/v1/viagem", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ViagemController {
@@ -27,10 +25,10 @@ public class ViagemController {
         return ResponseEntity.ok(viagemService.save(viagem, idFuncionario, idCarro));
     }
 
-    @DeleteMapping("/{idFuncionario}/{idCarro}")
+    @DeleteMapping("/{idViagem}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long idFuncionario, @PathVariable Long idCarro) {
-        viagemService.delete(idFuncionario, idCarro);
+    public void deleteById(@PathVariable Long idViagem) {
+        viagemService.delete(idViagem);
     }
 
 

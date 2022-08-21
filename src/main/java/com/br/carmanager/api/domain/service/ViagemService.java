@@ -5,6 +5,6 @@ import com.br.carmanager.api.domain.model.Viagem;
 public interface ViagemService {
 
     Viagem save(Viagem viagem, Long idFuncionario, Long idCarro);
-    Viagem findById(Long id);
-    void delete(Long idFuncionario, Long idCarro);
+    Viagem findById(Long idViagem);
+    void delete(Long idViagem);
 }
