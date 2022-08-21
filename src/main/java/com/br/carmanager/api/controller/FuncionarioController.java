@@ -24,9 +24,9 @@ public class FuncionarioController {
         return ResponseEntity.ok(funcionarioService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Funcionario> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(funcionarioService.findById(id));
+    @GetMapping("/{idFuncionario}")
+    public ResponseEntity<Funcionario> findById(@PathVariable Long idFuncionario) {
+        return ResponseEntity.ok(funcionarioService.findById(idFuncionario));
     }
 
     @PostMapping

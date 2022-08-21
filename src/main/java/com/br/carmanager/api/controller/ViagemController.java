@@ -17,20 +17,20 @@ public class ViagemController {
     @Autowired
     private ViagemService viagemService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Viagem>> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(viagemService.findById(id));
+    @GetMapping("/{idViagem}")
+    public ResponseEntity<Viagem> findById(@PathVariable Long idViagem) {
+        return ResponseEntity.ok(viagemService.findById(idViagem));
     }
 
-    @PostMapping
-    public ResponseEntity<Viagem> saveViagem(@RequestBody Viagem viagem) {
-        return ResponseEntity.ok(viagemService.save(viagem));
+    @PostMapping("/{idFuncionario}/{idCarro}")
+    public ResponseEntity<Viagem> saveViagem(@PathVariable Long idFuncionario, @PathVariable Long idCarro, Viagem viagem) {
+        return ResponseEntity.ok(viagemService.save(viagem, idFuncionario, idCarro));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idFuncionario}/{idCarro}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
-        viagemService.delete(id);
+    public void deleteById(@PathVariable Long idFuncionario, @PathVariable Long idCarro) {
+        viagemService.delete(idFuncionario, idCarro);
     }
 
 

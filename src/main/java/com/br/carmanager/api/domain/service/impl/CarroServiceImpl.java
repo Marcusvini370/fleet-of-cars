@@ -43,6 +43,11 @@ public class CarroServiceImpl implements CarroService {
         }
     }
 
+    @Override
+    public List<Carro> findCarByStatusUnavailable() {
+        return carroRepository.findCarByStatusUnavailable();
+    }
+
     public Carro BuscarOuFalhar(Long id) {
         return carroRepository.findById(id)
                 .orElseThrow(() -> new CarroNotFoundException(String.format(MSG_CARRO_NAO_ENCONTRADO, id)));

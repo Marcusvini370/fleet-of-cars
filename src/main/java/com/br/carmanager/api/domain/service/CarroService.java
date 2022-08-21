@@ -11,4 +11,6 @@ public interface CarroService {
     Carro findById(Long id);
     List<Carro> findAll();
     void delete(Long id);
+    List<Carro> findCarByStatusUnavailable();
+
 }

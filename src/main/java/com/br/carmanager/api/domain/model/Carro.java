@@ -1,5 +1,6 @@
 package com.br.carmanager.api.domain.model;
 
+import com.br.carmanager.api.domain.enums.StatusCarro;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Getter
@@ -27,5 +29,9 @@ public class Carro implements Serializable {
     @NotBlank
     private String marca;
 
-    private Date dataFabricacao;
+    @Column(nullable = false, columnDefinition = "timestamp")
+    private OffsetDateTime dataFabricacao;
+
+    @Enumerated(EnumType.STRING)
+    private StatusCarro status = StatusCarro.DISPONIVEL;
 }

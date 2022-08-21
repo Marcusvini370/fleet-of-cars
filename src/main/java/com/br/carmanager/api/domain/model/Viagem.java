@@ -6,8 +6,10 @@ import javax.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Getter
@@ -29,7 +31,13 @@ public class Viagem implements Serializable {
     @ManyToOne
     private Carro carro;
 
-    private Date dataRetirada;
-    private Date dataEntrega;
+
+    @CreationTimestamp
+    @Column(nullable = false, columnDefinition = "timestamp")
+    private OffsetDateTime dataRetirada;
+
+    private OffsetDateTime  dataEntrega;
+
+
 
 }

@@ -24,9 +24,15 @@ public class CarroController {
         return ResponseEntity.ok(carroService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Carro> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(carroService.findById(id));
+    @GetMapping("/retirados")
+    public ResponseEntity<List<Carro>> findCarByStatusUnavailable() {
+        return ResponseEntity.ok(carroService.findCarByStatusUnavailable());
+    }
+
+
+    @GetMapping("/{idCarro}")
+    public ResponseEntity<Carro> findById(@PathVariable Long idCarro) {
+        return ResponseEntity.ok(carroService.findById(idCarro));
     }
 
     @PostMapping
