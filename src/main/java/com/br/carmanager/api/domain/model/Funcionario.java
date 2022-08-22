@@ -1,5 +1,6 @@
 package com.br.carmanager.api.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,43 +32,51 @@ public class Funcionario implements UserDetails {
     private Integer matricula;
 
     private String login;
-
+    @JsonIgnore
     private String password;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER)
     private List<Perfil> perfis = new ArrayList<>();
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.perfis;
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
 
         return this.password;
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return this.login;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
