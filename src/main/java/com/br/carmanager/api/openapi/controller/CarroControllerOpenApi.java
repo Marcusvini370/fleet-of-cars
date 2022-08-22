@@ -4,6 +4,8 @@ import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.exceptionhandler.Problem;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public interface CarroControllerOpenApi {
 
     @ApiOperation("Lista todos os Carros")
     ResponseEntity<List<CarroDTO>> findAll();
+
+    @ApiOperation("Lista todos os Carros com paginação")
+    ResponseEntity<Page<CarroDTO>> listarCarrosPage(Pageable pageable);
 
     @ApiOperation("Lista os carros que estão em uso")
      ResponseEntity<List<CarroDTO>> findCarByStatusUnavailable();

@@ -4,6 +4,8 @@ import com.br.carmanager.api.domain.dto.FuncionarioDTO;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.exceptionhandler.Problem;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public interface FuncionarioControllerOpenApi {
 
      @ApiOperation("Lista todos Funcionários")
      ResponseEntity<List<FuncionarioDTO>> findAll();
+
+     @ApiOperation("Lista todos os Funcionários com paginação")
+     ResponseEntity<Page<FuncionarioDTO>> listarFuncionariosPage(Pageable pageable);
 
      @ApiOperation("Busca Funcionário por id")
      @ApiResponses({ @ApiResponse(code = 404, message = "Id do funcionário é inválido", response = Problem.class),
