@@ -1,7 +1,5 @@
 package com.br.carmanager.api.security;
 
-import java.util.Optional;
-
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service

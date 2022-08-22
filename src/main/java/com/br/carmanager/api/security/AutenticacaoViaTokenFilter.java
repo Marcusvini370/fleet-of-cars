@@ -1,20 +1,17 @@
 package com.br.carmanager.api.security;
 
-import java.io.IOException;
+import com.br.carmanager.api.domain.model.Funcionario;
+import com.br.carmanager.api.domain.repository.FuncionarioRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.br.carmanager.api.domain.model.Funcionario;
-import com.br.carmanager.api.domain.repository.FuncionarioRepository;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.filter.OncePerRequestFilter;
-
-
-import lombok.AllArgsConstructor;
+import java.io.IOException;
 
 @AllArgsConstructor
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {

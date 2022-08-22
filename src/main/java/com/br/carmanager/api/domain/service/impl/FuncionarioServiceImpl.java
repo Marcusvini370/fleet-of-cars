@@ -2,13 +2,11 @@ package com.br.carmanager.api.domain.service.impl;
 
 import com.br.carmanager.api.assembler.FuncionarioDtoAssembler;
 import com.br.carmanager.api.assembler.FuncionarioInputDisassembler;
-import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.exception.FuncionarioNotFoundException;
 import com.br.carmanager.api.domain.exception.FuncionarioUniqueLogin;
 import com.br.carmanager.api.domain.exception.FuncionarioUniqueMatriculaException;
-import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;

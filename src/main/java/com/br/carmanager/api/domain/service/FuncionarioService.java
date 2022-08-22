@@ -1,8 +1,6 @@
 package com.br.carmanager.api.domain.service;
 
-import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
-import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 
 import java.util.List;
