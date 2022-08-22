@@ -14,10 +14,10 @@ import java.time.OffsetDateTime;
 public class ViagemInput {
 
     @NotNull
-    private Funcionario funcionario;
+    private FuncionarioIdInput funcionario;
 
     @NotNull
-    private Carro carro;
+    private CarroIdInput carro;
 
     @NotNull
     @ApiModelProperty(example = "2022-08-10T10:00:05.630-03:00", required = true)
