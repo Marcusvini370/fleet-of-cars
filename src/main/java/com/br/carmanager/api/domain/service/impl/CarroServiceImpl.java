@@ -4,6 +4,7 @@ import com.br.carmanager.api.assembler.CarroDtoAssembler;
 import com.br.carmanager.api.assembler.CarroInputDisassembler;
 import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.input.CarroInput;
+import com.br.carmanager.api.domain.enums.StatusCarro;
 import com.br.carmanager.api.domain.exception.CarroNotFoundException;
 import com.br.carmanager.api.domain.exception.NegocioException;
 import com.br.carmanager.api.domain.model.Carro;
@@ -35,6 +36,7 @@ public class CarroServiceImpl implements CarroService {
     @Transactional
     public CarroDTO save(CarroInput carroInput) {
         Carro carro = carroInputDisassembler.toDomainObject(carroInput);
+        carro.setStatus(StatusCarro.DISPONIVEL);
         return carroDtoAssembler.toModel(carroRepository.save(carro));
     }
 

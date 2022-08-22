@@ -25,6 +25,4 @@ public class CarroInput {
     @ApiModelProperty(example = "2022-01-01T10:00:05.630-03:00", required = true)
     private OffsetDateTime dataFabricacao;
 
-    @ApiModelProperty(example = "INDISPONIVEL", required = true)
-    private StatusCarro status = StatusCarro.DISPONIVEL;
 }
