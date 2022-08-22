@@ -5,6 +5,9 @@ import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import com.br.carmanager.api.openapi.controller.FuncionarioControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,12 @@ public class FuncionarioController implements FuncionarioControllerOpenApi {
     @GetMapping
     public ResponseEntity<List<FuncionarioDTO>> findAll() {
         return ResponseEntity.ok(funcionarioService.findAll());
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<FuncionarioDTO>> listarFuncionariosPage(
+            @PageableDefault(size = 5, sort = "nome") Pageable pageable) {
+        return ResponseEntity.ok(funcionarioService.findAllPage(pageable));
     }
 
     @GetMapping("/{idFuncionario}")

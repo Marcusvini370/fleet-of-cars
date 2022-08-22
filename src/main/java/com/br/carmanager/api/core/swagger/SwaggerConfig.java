@@ -1,6 +1,7 @@
 package com.br.carmanager.api.core.swagger;
 
 import com.br.carmanager.api.exceptionhandler.Problem;
+import com.br.carmanager.api.openapi.model.PageableModelSwagger;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.awt.print.Pageable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -42,7 +44,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 	            .globalResponseMessage(RequestMethod.DELETE, globalDeleteResponseMessages())
 	            .additionalModels(typeResolver.resolve(Problem.class))
 				.ignoredParameterTypes(Void.class)
-	            //.directModelSubstitute(Pageable.class, PageableModelSwagger.class)
+	            .directModelSubstitute(Pageable.class, PageableModelSwagger.class)
 				.apiInfo(apiInfo())
 				.securityContexts(Arrays.asList(securityContext()))
 				.securitySchemes(Arrays.asList(apiKey()))

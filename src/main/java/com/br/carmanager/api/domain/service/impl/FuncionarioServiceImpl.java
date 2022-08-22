@@ -12,6 +12,9 @@ import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,6 +84,15 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Transactional
     public FuncionarioDTO findById(Long id) {
         return funcionarioDtoAssembler.toModel(BuscarOuFalhar(id));
+    }
+
+    @Override
+    @Transactional
+    public Page<FuncionarioDTO> findAllPage(Pageable pageable) {
+        Page<Funcionario> funcionariosPage = funcionarioRepository.findAll(pageable);
+        List<FuncionarioDTO> funcionariosDTO = funcionarioDtoAssembler.toCollectionModel(funcionariosPage.getContent());
+        Page<FuncionarioDTO> funcionariosDtoPage = new PageImpl<>(funcionariosDTO, pageable, funcionariosPage.getTotalElements());
+        return funcionariosDtoPage;
     }
 
     @Override

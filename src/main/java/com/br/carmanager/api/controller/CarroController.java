@@ -5,6 +5,9 @@ import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.domain.service.CarroService;
 import com.br.carmanager.api.openapi.controller.CarroControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,12 @@ public class CarroController implements CarroControllerOpenApi {
     @GetMapping
     public ResponseEntity<List<CarroDTO>> findAll() {
         return ResponseEntity.ok(carroService.findAll());
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<CarroDTO>> listarCarrosPage(
+            @PageableDefault(size = 5, sort = "modelo") Pageable pageable) {
+        return ResponseEntity.ok(carroService.findAllPage(pageable));
     }
 
     @GetMapping("/retirados")

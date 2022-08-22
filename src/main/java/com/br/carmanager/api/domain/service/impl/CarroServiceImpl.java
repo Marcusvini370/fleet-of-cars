@@ -10,6 +10,9 @@ import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.repository.CarroRepository;
 import com.br.carmanager.api.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +58,15 @@ public class CarroServiceImpl implements CarroService {
     @Transactional
     public List<CarroDTO> findAll() {
         return carroDtoAssembler.toCollectionModel(carroRepository.findAll());
+    }
+
+    @Override
+    @Transactional
+    public Page<CarroDTO> findAllPage(Pageable pageable) {
+        Page<Carro> carrosPage = carroRepository.findAll(pageable);
+        List<CarroDTO> carrosDTO = carroDtoAssembler.toCollectionModel(carrosPage.getContent());
+        Page<CarroDTO> carrosDtoPage = new PageImpl<>(carrosDTO, pageable, carrosPage.getTotalElements());
+        return carrosDtoPage;
     }
 
     @Override
