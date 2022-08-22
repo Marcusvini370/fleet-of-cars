@@ -46,6 +46,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 				.apiInfo(apiInfo())
 				.securityContexts(Arrays.asList(securityContext()))
 				.securitySchemes(Arrays.asList(apiKey()))
+				.tags(new Tag("Autenticação", "Auntentica o login na aplicação"))
 				.tags(new Tag("Carros", "Gerencia os Carros"))
 				.tags(new Tag("Funcionarios", "Gerencia os Funcionários"))
 				.tags(new Tag("Viagens", "Gerencia as Viagens"));
@@ -105,7 +106,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 	}
 
 	public ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("API - Gerenciador de uma Frotas de Carro").description("").version("1")
+		return new ApiInfoBuilder().title("API - Frota de Carros").description("").version("1")
 				.contact(new Contact("Marcus Vinicius", "https://github.com/Marcusvini370/Aircarft", "marcusvini370@gmail.com")).build();
 	}
 

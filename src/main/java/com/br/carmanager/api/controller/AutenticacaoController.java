@@ -3,6 +3,7 @@ package com.br.carmanager.api.controller;
 import com.br.carmanager.api.controller.dto.LoginDto;
 import com.br.carmanager.api.controller.dto.TokenDto;
 import com.br.carmanager.api.core.security.TokenService;
+import com.br.carmanager.api.openapi.controller.AutenticacaoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
-public class AutenticacaoController {
+@RequestMapping("/api/v1/auth")
+public class AutenticacaoController implements AutenticacaoControllerOpenApi {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
@@ -38,7 +39,6 @@ public class AutenticacaoController {
 
 			String token = tokenService.gerarToken(authentication);
 
-			// System.out.println(token)
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 
 		} catch (AuthenticationException e) {
