@@ -1,6 +1,6 @@
 package com.br.carmanager.api.domain.exception;
 
-public class FuncionarioUniqueMatriculaException extends EntityNotFoundException {
+public class FuncionarioUniqueMatriculaException extends NegocioException {
 
 	private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,8 @@ package com.br.carmanager.api.controller;
 import com.br.carmanager.api.controller.dto.LoginDto;
 import com.br.carmanager.api.controller.dto.TokenDto;
 import com.br.carmanager.api.core.security.TokenService;
+import com.br.carmanager.api.domain.exception.FuncionarioUniqueMatriculaException;
+import com.br.carmanager.api.domain.exception.LoginInvalidException;
 import com.br.carmanager.api.openapi.controller.AutenticacaoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +44,7 @@ public class AutenticacaoController implements AutenticacaoControllerOpenApi {
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 
 		} catch (AuthenticationException e) {
-
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login ou senha está inválido");
+			throw new LoginInvalidException(String.format("Login ou senha está inválido"));
 		}
 
 	}

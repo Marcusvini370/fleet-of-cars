@@ -18,7 +18,7 @@ CREATE TABLE tb_funcionario (
 	CONSTRAINT uk_tb_funcionario_matricula UNIQUE (matricula)
 );
 
-CREATE TABLE perfil (
+CREATE TABLE tb_perfil (
 	id serial,
 	nome varchar(255) NULL,
 	CONSTRAINT perfil_pkey PRIMARY KEY (id)
@@ -27,7 +27,7 @@ CREATE TABLE perfil (
 CREATE TABLE tb_funcionario_perfis (
 	funcionario_id serial,
 	perfis_id int8 NOT NULL,
-	CONSTRAINT fk_perfil_id FOREIGN KEY (perfis_id) REFERENCES public.perfil(id),
+	CONSTRAINT fk_perfil_id FOREIGN KEY (perfis_id) REFERENCES public.tb_perfil(id),
 	CONSTRAINT fk_funcionario_id FOREIGN KEY (funcionario_id) REFERENCES public.tb_funcionario(id)
 );
 
