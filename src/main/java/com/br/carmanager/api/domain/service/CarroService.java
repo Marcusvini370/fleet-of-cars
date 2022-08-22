@@ -9,6 +9,7 @@ import java.util.List;
 public interface CarroService {
 
     CarroDTO save(CarroInput carroInput);
+    CarroDTO update(Long id, CarroInput carroInput);
     CarroDTO findById(Long id);
     List<CarroDTO> findAll();
     void delete(Long id);

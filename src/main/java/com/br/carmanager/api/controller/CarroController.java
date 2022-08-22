@@ -29,7 +29,6 @@ public class CarroController {
         return ResponseEntity.ok(carroService.findCarByStatusUnavailable());
     }
 
-
     @GetMapping("/{idCarro}")
     public ResponseEntity<CarroDTO> findById(@PathVariable Long idCarro) {
         return ResponseEntity.ok(carroService.findById(idCarro));
@@ -40,10 +39,16 @@ public class CarroController {
         return ResponseEntity.ok(carroService.save(carroInput));
     }
 
-    @DeleteMapping("/{id}")
+    @PutMapping("/{idCarro}")
+    public ResponseEntity<CarroDTO> updateCarro(@PathVariable Long idCarro,
+                                                      @RequestBody @Valid CarroInput carroInput) {
+        return ResponseEntity.ok(carroService.update(idCarro, carroInput));
+    }
+
+    @DeleteMapping("/{idCarro}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
-        carroService. delete(id);
+    public void deleteById(@PathVariable Long idCarro) {
+        carroService. delete(idCarro);
     }
 
 

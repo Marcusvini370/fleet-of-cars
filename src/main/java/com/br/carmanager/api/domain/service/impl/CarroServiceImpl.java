@@ -34,6 +34,15 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
+    public CarroDTO update(Long id, CarroInput carroInput) {
+
+        Carro carroAtual = BuscarOuFalhar(id);
+        carroInputDisassembler.copyToDomainObject(carroInput, carroAtual);
+
+        return carroDtoAssembler.toModel(carroRepository.save(carroAtual));
+    }
+
+    @Override
     public CarroDTO findById(Long id) {
         return carroDtoAssembler.toModel(BuscarOuFalhar(id));
     }

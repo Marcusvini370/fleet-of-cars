@@ -2,11 +2,13 @@ package com.br.carmanager.api.domain.service.impl;
 
 import com.br.carmanager.api.assembler.FuncionarioDtoAssembler;
 import com.br.carmanager.api.assembler.FuncionarioInputDisassembler;
+import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.exception.FuncionarioNotFoundException;
 import com.br.carmanager.api.domain.exception.FuncionarioUniqueLogin;
 import com.br.carmanager.api.domain.exception.FuncionarioUniqueMatriculaException;
+import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;
@@ -49,6 +51,29 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
         funcionario.setPassword(this.bCryptPasswordEncoder.encode(funcionarioInput.getPassword()));
         return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionario));
+    }
+
+    @Override
+    public FuncionarioDTO update(Long id, FuncionarioInput funcionarioInput) {
+
+        Funcionario funcionarioAtual = BuscarOuFalhar(id);
+        funcionarioInputDisassembler.copyToDomainObject(funcionarioInput, funcionarioAtual);
+
+        if (funcionarioInput.getLogin() != funcionarioAtual.getLogin()) {
+            if (funcionarioRepository.findFuncionarioByLogin(funcionarioAtual.getLogin()) != null) {
+                throw new FuncionarioUniqueLogin(String.format(MSG_FUNCIONARIO_LOGIN_UNICO, funcionarioAtual.getLogin()));
+            }
+        }
+
+        if (funcionarioInput.getMatricula() != funcionarioAtual.getMatricula()) {
+            if (funcionarioRepository.findByMatricula(funcionarioAtual.getMatricula()) != null) {
+                throw new FuncionarioUniqueMatriculaException(String.format(MSG_FUNCIONARIO_MATRICULA_UNICA, funcionarioAtual.getMatricula()));
+            }
+        }
+
+        funcionarioAtual.setPassword(this.bCryptPasswordEncoder.encode(funcionarioAtual .getPassword()));
+
+        return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionarioAtual));
     }
 
     @Override

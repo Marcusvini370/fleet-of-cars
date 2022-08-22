@@ -1,6 +1,8 @@
 package com.br.carmanager.api.controller;
 
+import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
+import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,12 @@ public class FuncionarioController {
     @PostMapping
     public ResponseEntity<FuncionarioDTO> saveFuncionario(@RequestBody @Valid FuncionarioInput funcionarioInput) {
         return ResponseEntity.ok(funcionarioService.save(funcionarioInput));
+    }
+
+    @PutMapping("/{idFuncionario}")
+    public ResponseEntity<FuncionarioDTO> updateFuncionario(@PathVariable Long idFuncionario,
+                                                @RequestBody @Valid FuncionarioInput funcionarioInput) {
+        return ResponseEntity.ok(funcionarioService.update(idFuncionario, funcionarioInput));
     }
 
     @DeleteMapping("/{id}")
