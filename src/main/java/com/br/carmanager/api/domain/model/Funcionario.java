@@ -40,6 +40,10 @@ public class Funcionario implements UserDetails {
     private List<Perfil> perfis = new ArrayList<>();
 
     @JsonIgnore
+    @OneToMany
+    private List<Viagem> viagens;
+
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.perfis;

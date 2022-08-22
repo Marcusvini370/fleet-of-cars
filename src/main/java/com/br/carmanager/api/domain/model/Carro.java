@@ -1,6 +1,7 @@
 package com.br.carmanager.api.domain.model;
 
 import com.br.carmanager.api.domain.enums.StatusCarro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,4 +34,8 @@ public class Carro implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private StatusCarro status;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Viagem> viagens;
 }

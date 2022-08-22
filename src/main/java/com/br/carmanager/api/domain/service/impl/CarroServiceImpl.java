@@ -5,11 +5,13 @@ import com.br.carmanager.api.assembler.CarroInputDisassembler;
 import com.br.carmanager.api.domain.dto.CarroDTO;
 import com.br.carmanager.api.domain.dto.input.CarroInput;
 import com.br.carmanager.api.domain.exception.CarroNotFoundException;
+import com.br.carmanager.api.domain.exception.NegocioException;
 import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.repository.CarroRepository;
 import com.br.carmanager.api.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,12 +56,12 @@ public class CarroServiceImpl implements CarroService {
 
     @Override
     public void delete(Long id) {
-
+        BuscarOuFalhar(id);
         try {
             carroRepository.deleteById(id);
 
-        } catch (EmptyResultDataAccessException e) {
-            throw new CarroNotFoundException(String.format(MSG_CARRO_NAO_ENCONTRADO, id));
+        } catch (Exception e) {
+            throw new NegocioException(String.format("Não é possível excluir o carro com o código %d", id));
         }
     }
 
