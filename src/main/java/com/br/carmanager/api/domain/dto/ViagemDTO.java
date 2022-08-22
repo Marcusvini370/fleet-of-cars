@@ -12,8 +12,8 @@ import java.time.OffsetDateTime;
 public class ViagemDTO {
 
     private Long id;
-    private Funcionario funcionario;
-    private Carro carro;
+    private FuncionarioDTO funcionario;
+    private CarroDTO carro;
     private OffsetDateTime dataRetirada;
     private OffsetDateTime  dataEntrega;
 }

@@ -10,4 +10,5 @@ public class FuncionarioDTO {
     private Long id;
     private String nome;
     private Integer matricula;
+    private String login;
 }
