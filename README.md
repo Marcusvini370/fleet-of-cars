@@ -13,6 +13,13 @@ A documentação da api pode ser acessada pelo seguinte site: https://api-fleet-
 
 ![swag](https://user-images.githubusercontent.com/51136557/185996094-ce069f1b-2299-4ebc-9263-29388feb4ef9.png)
 
+## <h2 align="center">Autenticação pela documentação OpenApi</h2>
+
+![Animação](https://user-images.githubusercontent.com/51136557/186007367-cf6dca45-ab79-4396-9a4c-00ced1cb08ab.gif)
+
+<br>
+
+
 ## <h2 align="center">Demonstração da API</h2>
 
 ![Animação-min](https://user-images.githubusercontent.com/51136557/186000594-3814a92c-695c-47e4-838d-5ad191d1eee5.gif)
