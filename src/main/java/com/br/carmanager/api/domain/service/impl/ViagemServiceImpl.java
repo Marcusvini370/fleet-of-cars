@@ -85,9 +85,9 @@ public class ViagemServiceImpl implements ViagemService {
             } else {
                 throw new ViagemCompletedException(String.format("A viagem já se encontra concluída!"));
             }
-        } else {
-            throw new ViagemNotFoundException(String.format("Não existe viagem registrada com o funcionario %s usando o carro codigo %d", funcionario.getNome(), carro.getId()));
-        }
+            } else {
+                throw new ViagemNotFoundException(String.format("Não existe viagem registrada com o funcionario %s usando o carro codigo %d", funcionario.getNome(), carro.getId()));
+            }
     }
 
     @Override

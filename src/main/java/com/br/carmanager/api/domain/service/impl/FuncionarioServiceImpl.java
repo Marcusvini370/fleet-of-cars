@@ -5,6 +5,8 @@ import com.br.carmanager.api.assembler.FuncionarioInputDisassembler;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.exception.FuncionarioNotFoundException;
+import com.br.carmanager.api.domain.exception.FuncionarioUniqueLogin;
+import com.br.carmanager.api.domain.exception.FuncionarioUniqueMatriculaException;
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;
@@ -19,6 +21,8 @@ import java.util.List;
 public class FuncionarioServiceImpl implements FuncionarioService {
 
     private static final String MSG_FUNCIONARIO_NAO_ENCONTRADO = "Não existe um cadastro de funcionário com o código %d";
+    private static final String MSG_FUNCIONARIO_LOGIN_UNICO = "Já existe um cadastro de funcionário com o login %s ";
+    private static final String MSG_FUNCIONARIO_MATRICULA_UNICA = "A matrícula %d já está sendo utilizada por outro funcionário";
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
@@ -34,6 +38,15 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     public FuncionarioDTO save(FuncionarioInput funcionarioInput) {
         Funcionario funcionario = funcionarioInputDisassembler.toDomainObject(funcionarioInput);
+
+        if (funcionarioRepository.findByMatricula(funcionario.getMatricula()) != null) {
+            throw new FuncionarioUniqueMatriculaException(String.format(MSG_FUNCIONARIO_MATRICULA_UNICA, funcionario.getMatricula()));
+        }
+
+        if (funcionarioRepository.findFuncionarioByLogin(funcionario.getLogin()) != null) {
+            throw new FuncionarioUniqueLogin(String.format(MSG_FUNCIONARIO_LOGIN_UNICO, funcionario.getLogin()));
+        }
+
         funcionario.setPassword(this.bCryptPasswordEncoder.encode(funcionarioInput.getPassword()));
         return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionario));
     }

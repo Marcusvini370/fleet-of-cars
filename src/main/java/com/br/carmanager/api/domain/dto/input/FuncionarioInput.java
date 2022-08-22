@@ -16,7 +16,9 @@ public class FuncionarioInput {
     @NotNull
     private Integer matricula;
 
+    @NotBlank
     private String login;
 
+    @NotBlank
     private String password;
 }
