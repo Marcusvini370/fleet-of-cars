@@ -15,6 +15,7 @@ import com.br.carmanager.api.domain.repository.ViagemRepository;
 import com.br.carmanager.api.domain.service.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -40,6 +41,7 @@ public class ViagemServiceImpl implements ViagemService {
     ViagemInputDisassembler viagemInputDisassembler;
 
     @Override
+    @Transactional
     public ViagemDTO save(ViagemInput viagemInput, Long idFuncionario, Long idCarro) {
 
         Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
@@ -61,11 +63,13 @@ public class ViagemServiceImpl implements ViagemService {
     }
 
     @Override
+    @Transactional
     public ViagemDTO findById(Long id) {
         return viagemDtoAssembler.toModel(BuscarOuFalhar(id));
     }
 
     @Override
+    @Transactional
     public void delete(Long idFuncionario,Long idCarro) {
         Funcionario funcionario = funcionarioService.BuscarOuFalhar(idFuncionario);
         Carro carro = carroService.BuscarOuFalhar(idCarro);
@@ -89,6 +93,7 @@ public class ViagemServiceImpl implements ViagemService {
     }
 
     @Override
+    @Transactional
     public List<Viagem> findViagemByDataEntregaWithMonthAndYear(Integer month, Integer year) {
         return viagemRepository.findViagemByDataEntregaWithMonthAndYear(month, year);
     }

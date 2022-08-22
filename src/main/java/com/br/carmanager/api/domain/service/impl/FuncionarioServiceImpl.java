@@ -12,10 +12,9 @@ import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import com.br.carmanager.api.domain.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,6 +37,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Override
+    @Transactional
     public FuncionarioDTO save(FuncionarioInput funcionarioInput) {
         Funcionario funcionario = funcionarioInputDisassembler.toDomainObject(funcionarioInput);
 
@@ -54,6 +54,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
+    @Transactional
     public FuncionarioDTO update(Long id, FuncionarioInput funcionarioInput) {
 
         Funcionario funcionarioAtual = BuscarOuFalhar(id);
@@ -77,6 +78,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
+    @Transactional
     public FuncionarioDTO findById(Long id) {
         return funcionarioDtoAssembler.toModel(BuscarOuFalhar(id));
     }
@@ -87,6 +89,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         BuscarOuFalhar(id);
         try {

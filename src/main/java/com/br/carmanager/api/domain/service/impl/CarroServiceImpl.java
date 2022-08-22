@@ -10,9 +10,8 @@ import com.br.carmanager.api.domain.model.Carro;
 import com.br.carmanager.api.domain.repository.CarroRepository;
 import com.br.carmanager.api.domain.service.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,12 +29,14 @@ public class CarroServiceImpl implements CarroService {
     CarroInputDisassembler carroInputDisassembler;
 
     @Override
+    @Transactional
     public CarroDTO save(CarroInput carroInput) {
         Carro carro = carroInputDisassembler.toDomainObject(carroInput);
         return carroDtoAssembler.toModel(carroRepository.save(carro));
     }
 
     @Override
+    @Transactional
     public CarroDTO update(Long id, CarroInput carroInput) {
 
         Carro carroAtual = BuscarOuFalhar(id);
@@ -45,16 +46,19 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
+    @Transactional
     public CarroDTO findById(Long id) {
         return carroDtoAssembler.toModel(BuscarOuFalhar(id));
     }
 
     @Override
+    @Transactional
     public List<CarroDTO> findAll() {
         return carroDtoAssembler.toCollectionModel(carroRepository.findAll());
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         BuscarOuFalhar(id);
         try {
@@ -66,6 +70,7 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
+    @Transactional
     public List<CarroDTO> findCarByStatusUnavailable() {
         return carroDtoAssembler.toCollectionModel( carroRepository.findCarByStatusUnavailable());
     }
