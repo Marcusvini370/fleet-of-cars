@@ -54,6 +54,7 @@ insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id
 insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (8, '2022-01-16T07:43:34Z', null, 8, 8);
 insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (9, '2022-01-23T20:52:17Z', null, 9, 9);
 insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (10, '2021-10-07T12:19:40Z', null, 10, 10);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-10-07T12:18:40Z', null, 10, 10);
 
 
 

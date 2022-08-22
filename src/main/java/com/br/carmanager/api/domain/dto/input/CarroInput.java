@@ -1,6 +1,5 @@
 package com.br.carmanager.api.domain.dto.input;
 
-import com.br.carmanager.api.domain.enums.StatusCarro;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
