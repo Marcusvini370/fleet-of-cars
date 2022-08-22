@@ -103,8 +103,8 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Override
     @Transactional
     public void delete(Long id) {
-        BuscarOuFalhar(id);
         try {
+            BuscarOuFalhar(id);
             funcionarioRepository.deleteById(id);
 
         } catch (Exception e) {

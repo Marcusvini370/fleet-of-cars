@@ -35,7 +35,4 @@ public class Carro implements Serializable {
     @Enumerated(EnumType.STRING)
     private StatusCarro status;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Viagem> viagens;
 }
