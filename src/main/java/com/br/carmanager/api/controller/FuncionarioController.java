@@ -3,6 +3,7 @@ package com.br.carmanager.api.controller;
 import com.br.carmanager.api.domain.dto.FuncionarioDTO;
 import com.br.carmanager.api.domain.dto.input.FuncionarioInput;
 import com.br.carmanager.api.domain.service.FuncionarioService;
+import com.br.carmanager.api.openapi.controller.FuncionarioControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/funcionarios", produces = MediaType.APPLICATION_JSON_VALUE)
-public class FuncionarioController {
+public class FuncionarioController implements FuncionarioControllerOpenApi {
 
     @Autowired
     private FuncionarioService funcionarioService;

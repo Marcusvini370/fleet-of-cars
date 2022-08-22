@@ -1,4 +1,4 @@
-package com.br.carmanager.api.security;
+package com.br.carmanager.api.core.security;
 
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/api/v1").permitAll()
+		.antMatchers(HttpMethod.GET,"**").permitAll()
 				.antMatchers(HttpMethod.GET, "/api/v1/*").permitAll()
 				.antMatchers(HttpMethod.POST, "/auth").permitAll()
 				.anyRequest().authenticated()

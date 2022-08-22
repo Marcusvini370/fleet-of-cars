@@ -2,7 +2,7 @@ package com.br.carmanager.api.controller;
 
 import com.br.carmanager.api.controller.dto.LoginDto;
 import com.br.carmanager.api.controller.dto.TokenDto;
-import com.br.carmanager.api.security.TokenService;
+import com.br.carmanager.api.core.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -27,6 +27,7 @@ public class Carro implements Serializable {
 
     private String marca;
 
+    @Column(nullable = false, columnDefinition = "timestamp")
     private OffsetDateTime dataFabricacao;
 
     @Enumerated(EnumType.STRING)

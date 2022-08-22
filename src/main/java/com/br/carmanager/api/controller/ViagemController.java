@@ -4,6 +4,7 @@ import com.br.carmanager.api.domain.dto.ViagemDTO;
 import com.br.carmanager.api.domain.dto.input.ViagemInput;
 import com.br.carmanager.api.domain.model.Viagem;
 import com.br.carmanager.api.domain.service.ViagemService;
+import com.br.carmanager.api.openapi.controller.ViagemControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/viagem", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ViagemController {
+public class ViagemController implements ViagemControllerOpenApi {
 
     @Autowired
     private ViagemService viagemService;
@@ -31,7 +32,7 @@ public class ViagemController {
 
     @DeleteMapping("/{idFuncionario}/{idCarro}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long idFuncionario, @PathVariable Long idCarro) {
+    public void deleteByDevolucao(@PathVariable Long idFuncionario, @PathVariable Long idCarro) {
         viagemService.delete(idFuncionario, idCarro);
     }
 

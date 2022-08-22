@@ -1,4 +1,4 @@
-package com.br.carmanager.api.security;
+package com.br.carmanager.api.core.security;
 
 import com.br.carmanager.api.domain.model.Funcionario;
 import com.br.carmanager.api.domain.repository.FuncionarioRepository;
