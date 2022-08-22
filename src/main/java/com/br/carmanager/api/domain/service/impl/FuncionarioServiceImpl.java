@@ -29,13 +29,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     @Autowired
     private FuncionarioInputDisassembler funcionarioInputDisassembler;
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @Override
     public FuncionarioDTO save(FuncionarioInput funcionarioInput) {
         Funcionario funcionario = funcionarioInputDisassembler.toDomainObject(funcionarioInput);
-
-        funcionarioInput.setPassword(bCryptPasswordEncoder.encode(funcionarioInput.getPassword()));
+        funcionario.setPassword(this.bCryptPasswordEncoder.encode(funcionarioInput.getPassword()));
         return funcionarioDtoAssembler.toModel(funcionarioRepository.save(funcionario));
     }
 

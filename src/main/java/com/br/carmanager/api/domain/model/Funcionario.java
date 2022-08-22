@@ -34,8 +34,8 @@ public class Funcionario implements UserDetails {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Perfil> perfis=new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Perfil> perfis = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
