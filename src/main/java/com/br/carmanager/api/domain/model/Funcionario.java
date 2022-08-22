@@ -18,9 +18,11 @@ import java.util.List;
 @Table(name = "tb_funcionario")
 public class Funcionario implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;

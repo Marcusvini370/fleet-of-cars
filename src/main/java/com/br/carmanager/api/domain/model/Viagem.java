@@ -16,9 +16,11 @@ import java.time.OffsetDateTime;
 @Table(name = "tb_viagem")
 public class Viagem implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

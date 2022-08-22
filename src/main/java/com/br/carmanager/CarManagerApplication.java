@@ -10,11 +10,7 @@ public class CarManagerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CarManagerApplication.class, args);
-
-
-
         System.out.println(bCryptPasswordEncoder().encode("teste"));
-
     }
 
     @Bean
