@@ -5,6 +5,7 @@ import com.br.carmanager.api.controller.dto.TokenDto;
 import com.br.carmanager.api.core.security.TokenService;
 import com.br.carmanager.api.openapi.controller.AutenticacaoControllerOpenApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,7 +29,7 @@ public class AutenticacaoController implements AutenticacaoControllerOpenApi {
 	private TokenService tokenService;
 
 	@PostMapping
-	public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginDto loginForm) {
+	public ResponseEntity<?> autenticar(@RequestBody @Valid LoginDto loginForm) {
 
 		UsernamePasswordAuthenticationToken dadosLogin = loginForm.converter();
 
@@ -36,15 +37,13 @@ public class AutenticacaoController implements AutenticacaoControllerOpenApi {
 			Authentication authentication = authenticationManager.authenticate(dadosLogin);
 
 			// devolver token /geracao token
-
 			String token = tokenService.gerarToken(authentication);
 
 			return ResponseEntity.ok(new TokenDto(token, "Bearer"));
 
 		} catch (AuthenticationException e) {
 
-			return ResponseEntity.badRequest().build();
-
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Login ou senha está inválido");
 		}
 
 	}
