@@ -44,18 +44,14 @@ INSERT INTO public.tb_funcionario_perfis(funcionario_id, perfis_id) VALUES (9, 2
 INSERT INTO public.tb_funcionario_perfis(funcionario_id, perfis_id) VALUES (10, 2);
 INSERT INTO public.tb_funcionario_perfis(funcionario_id, perfis_id) VALUES (11, 2);
 
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (1, '2021-12-26T21:50:23Z', '2022-08-22T20:17:26Z', 1, 1);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (2, '2021-11-26T20:24:19Z', '2022-08-22T20:17:26Z', 2, 2);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (3, '2021-12-05T01:17:01Z', '2022-02-03T20:17:26Z', 3, 3);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (4, '2022-01-30T22:28:29Z', null, 4, 4);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (5, '2022-02-05T19:37:24Z', '2021-08-30T07:51:06Z', 5, 5);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (6, '2021-08-25T13:46:52Z', '2022-01-04T15:41:57Z', 6, 6);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (7, '2021-11-22T09:21:46Z', '2022-02-23T14:19:21Z', 7, 7);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (8, '2022-01-16T07:43:34Z', null, 8, 8);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (9, '2022-01-23T20:52:17Z', null, 9, 9);
-insert into tb_viagem (id, data_retirada, data_entrega, carro_id, funcionario_id) values (10, '2021-10-07T12:19:40Z', null, 10, 10);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-12-26T21:50:23Z', '2022-08-22T20:17:26Z', 1, 1);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-11-26T20:24:19Z', '2022-08-22T20:17:26Z', 2, 2);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-12-05T01:17:01Z', '2022-02-03T20:17:26Z', 3, 3);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2022-01-30T22:28:29Z', null, 4, 4);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2022-02-05T19:37:24Z', '2021-08-30T07:51:06Z', 5, 5);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-08-25T13:46:52Z', '2022-01-04T15:41:57Z', 6, 6);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-11-22T09:21:46Z', '2022-02-23T14:19:21Z', 7, 7);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2022-01-16T07:43:34Z', null, 8, 8);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2022-01-23T20:52:17Z', null, 9, 9);
+insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-10-07T12:19:40Z', null, 10, 10);
 insert into tb_viagem (data_retirada, data_entrega, carro_id, funcionario_id) values ('2021-10-07T12:18:40Z', null, 10, 10);
-
-
-
-
